@@ -1,19 +1,32 @@
 import { StatusBar } from 'react-native';
 import { useFonts, Inter_400Regular, Inter_600SemiBold, Inter_700Bold, Inter_900Black } from '@expo-google-fonts/inter';
 import { Background } from './src/components/Background';
-import { Home } from './src/screens/Home';
+import { Routes } from './src/Routes';
 import { Loading } from './src/components/Loading';
+import { Subscription} from 'expo-modules-core'
+
+import './src/services/notificationConfigs';
+
+import { getPushNotificationToken } from './src/services/getPushNotificationToken';
+import { useEffect, useRef } from 'react';
 
 export default function App() {
+  const getNotificationListener = useRef<Subscription>();
+  const responseNotificationListener = useRef<Subscription>()
+
   const [ fontsLoaded ] = useFonts({
     Inter_400Regular, Inter_600SemiBold, Inter_700Bold, Inter_900Black
   })
+
+  useEffect(() => {
+    getPushNotificationToken();
+  }, [])
   return (
     <Background>
       <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
 
       {
-        fontsLoaded ? <Home /> : <Loading />
+        fontsLoaded ? <Routes /> : <Loading />
       }
     </Background>
   );
