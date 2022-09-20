@@ -27,7 +27,7 @@ export function Game() {
   }
 
     async function getDiscordUser(adsId: string) {
-    fetch(`https://3680-45-174-216-36.sa.ngrok.io/ads/${adsId}/discord`)
+    fetch(`https://d1ab-45-174-216-36.sa.ngrok.io/ads/${adsId}/discord`)
     .then(response => response.json())
     .then(data => {
       setDiscord(data.discord)
@@ -37,7 +37,7 @@ export function Game() {
   }
 
   useEffect(() => {
-    fetch(`https://3680-45-174-216-36.sa.ngrok.io/games/${game.id}/ads`)
+    fetch(`https://d1ab-45-174-216-36.sa.ngrok.io/games/${game.id}/ads`)
       .then(response => response.json())
       .then(data => {
         setAds(data)
